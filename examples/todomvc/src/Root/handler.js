@@ -6,7 +6,7 @@ import {router, history} from 'app';
 import {init as Todo} from './modules/Todo/handler';
 import {init as Test} from './modules/Test/handler';
 
-const enterModule = {
+const initMap = {
     Todo,
     Test
 };
@@ -30,12 +30,6 @@ export const init = ({dispatch, getState}) => {
     });
     router.register('/:module', {
         onMatch({params: {module}}, [lastMatchInfo = {}]) {
-            const init = enterModule[module];
-
-            if (!init) {
-                return;
-            }
-
             // 如下代码无业务意义——帮助理解deef-router START
             if (!arguments[1]) {
                 console.log('First time enter module, matchInfo', arguments[0]);
@@ -46,7 +40,16 @@ export const init = ({dispatch, getState}) => {
             }
             // 帮助理解deef-router END
 
-            init && init({dispatch, getState});
+            const initModule = initMap[module];
+            if (!initModule) {
+                return;
+            }
+
+            dispatch({
+                type: 'app/changeModule',
+                payload: module
+            });
+            initModule && initModule({dispatch, getState});
         }
     });
 };
