@@ -8,4 +8,4 @@ import 'fc-icon/style.css';
 import 'fcui2/css/main.less';
 
 app.model(model);
-app.start('#root', Root, () => {});
+app.start('#root', Root);

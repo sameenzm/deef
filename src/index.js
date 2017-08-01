@@ -7,8 +7,9 @@ import ReactDOM from 'react-dom';
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import {Provider, connect as hkConnect} from 'react-redux-hk';
 import handleActions from './handleActions';
+
 import isPlainObject from 'lodash-es/isPlainObject';
-import values from 'lodash-es/values';
+import noop from 'lodash-es/noop';
 import invariant from 'invariant';
 import window from 'global/window';
 import document from 'global/document';
@@ -99,7 +100,7 @@ export default function (opts = {}) {
             reducers[m.namespace] = getReducer(m.reducers, m.state);
         }
 
-        let devTools = () => noop => noop;
+        let devTools = () => noop;
         if (process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION__) {
             devTools = window.__REDUX_DEVTOOLS_EXTENSION__;
         }
@@ -199,7 +200,7 @@ export default function (opts = {}) {
         );
     }
 
-    function render(container, store, RootComponent, cb) {
+    function render(container, store, RootComponent, cb = noop) {
         ReactDOM.render(
             React.createElement(getProvider(store, RootComponent)),
             container,
