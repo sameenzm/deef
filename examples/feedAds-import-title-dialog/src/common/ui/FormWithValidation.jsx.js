@@ -1,6 +1,5 @@
 /**
  * @file 表单验证公共组件
- * @author chenmo04@baidu.com
  * @date 2017-07-07
  */
 define(function (require) {
