@@ -1,5 +1,5 @@
 /**
- * Created by baidu on 17/4/12.
+ * @file 导入标题弹窗 - UI
  */
 import React from 'react';
 import TitleWindow from 'fcui2/TitleWindow.jsx'
@@ -13,13 +13,9 @@ export default ({onImportTitle, isOpen, isRequesting, searchQuery, listData, ...
     const {onSearchInput, onSearch, onImportClick, onClose} = callbacks;
 
     return <TitleWindow
+        showCloseButton
         title="导入已有标题"
         isOpen={isOpen}
-        size={{
-            width: 400,
-            height: 300
-        }}
-        showCloseButton
         onClose={onClose}
     >
         <div className="idea-editor-import-title-dialog">

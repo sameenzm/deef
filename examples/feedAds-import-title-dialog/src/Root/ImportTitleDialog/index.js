@@ -1,5 +1,5 @@
 /**
- * Created by Homkai on 2016/11/5.
+ * @file 导入标题弹窗
  */
 import {connect} from 'app';
 import UI from './UI';

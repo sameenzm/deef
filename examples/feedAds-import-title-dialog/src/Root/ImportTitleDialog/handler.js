@@ -1,5 +1,5 @@
 /**
- * @file 导入标题弹窗公共handler
+ * @file 导入标题弹窗 - 公共handler
  * @note 对外暴露的接口以及可以复用的callback处理方法
  */
 import fetch from '../../common/fetch';
