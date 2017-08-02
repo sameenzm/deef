@@ -11,11 +11,13 @@ const listData = [
 ];
 
 module.exports = ({searchQuery = ''} = {}) => {
-    return Promise.resolve({
-        error: null,
-        status: 200,
-        data: {
-            listData: listData.filter(item => !searchQuery || ~item.title.indexOf(searchQuery))
-        }
-    })
+    return new Promise(resolve => {
+        setTimeout(() => resolve({
+            error: null,
+            status: 200,
+            data: {
+                listData: listData.filter(item => !searchQuery || ~item.title.indexOf(searchQuery))
+            }
+        }), 200);
+    });
 };

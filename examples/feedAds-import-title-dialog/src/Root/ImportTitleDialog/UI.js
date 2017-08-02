@@ -9,7 +9,7 @@ import _ from 'lodash';
 import './style.less';
 
 
-export default ({onImportTitle, isOpen, searchQuery, listData, ...callbacks}) => {
+export default ({onImportTitle, isOpen, isRequesting, searchQuery, listData, ...callbacks}) => {
     const {onSearchInput, onSearch, onImportClick, onClose} = callbacks;
 
     return <TitleWindow
@@ -30,21 +30,27 @@ export default ({onImportTitle, isOpen, searchQuery, listData, ...callbacks}) =>
                 onClick={onSearch}
             />
             {
-                listData.length
-                    ? <ul className="title-list">
-                        {
-                            listData.map(item => {
-                                const handleClick = _.partial(onImportClick, _.partial(onImportTitle, item.title));
-                                return <li key={item.title} className="title-item">
-                                    <div className="title-show">{item.title}</div>
-                                    <a href="javascript:;" className="import-btn" onClick={handleClick}>导入</a>
-                                </li>;
-                            })
-                        }
-                    </ul>
-                    : <div>
-                        暂无标题，快去新建一条创意吧！
-                    </div>
+                isRequesting
+                    ? <div className="list-tip">正在加载...</div>
+                    : (
+                        !listData.length
+                            ? <div className="list-tip">
+                                暂无标题，去新建创意吧！
+                            </div>
+                            : <ul className="title-list">
+                                {
+                                    listData.map(item => {
+                                        const handleClick = _.partial(
+                                            onImportClick, _.partial(onImportTitle, item.title)
+                                        );
+                                        return <li key={item.title} className="title-item">
+                                            <div className="title-show">{item.title}</div>
+                                            <a href="javascript:;" className="import-btn" onClick={handleClick}>导入</a>
+                                        </li>;
+                                    })
+                                }
+                            </ul>
+                    )
             }
         </div>
     </TitleWindow>;

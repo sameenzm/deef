@@ -4,7 +4,8 @@
 const importTitleDialog = {
     isOpen: false,
     listData: [],
-    searchQuery: ''
+    searchQuery: '',
+    isRequesting: true
 };
 
 const formData = {

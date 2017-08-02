@@ -5,8 +5,14 @@
 import fetch from '../../common/fetch';
 
 export const loadList = ({dispatch, getState}) => {
-    const {searchQuery} = getState().ideaEditor.importTitleDialog;
+    dispatch({
+        type: 'ideaEditor/changeImportTitleDialog',
+        payload: {
+            isRequesting: true
+        }
+    });
 
+    const {searchQuery} = getState().ideaEditor.importTitleDialog;
     fetch('/titleList', {
         searchQuery
     }).then(res => {
@@ -15,7 +21,8 @@ export const loadList = ({dispatch, getState}) => {
         dispatch({
             type: 'ideaEditor/changeImportTitleDialog',
             payload: {
-                listData
+                listData,
+                isRequesting: false
             }
         });
     });
