@@ -100,7 +100,7 @@ export default function (opts = {}) {
             reducers[m.namespace] = getReducer(m.reducers, m.state);
         }
 
-        let devTools = () => noop;
+        let devTools = () => noop => noop;
         if (process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION__) {
             devTools = window.__REDUX_DEVTOOLS_EXTENSION__;
         }
